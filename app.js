@@ -10,8 +10,14 @@ var usersRouter = require('./app_server/routes/users');
 /* Bring in the travel route */
 var travelRouter = require('./app_server/routes/travel');
 
+//create variable for API routes
+var apiRouter = require('./app_api/routes/index');
+
 // define handlebars variable 
 var handlebars = require('hbs');
+
+// connect to the database
+require('./app_api/models/db');
 
 var app = express();
 
@@ -35,6 +41,9 @@ app.use('/users', usersRouter);
 
 /* set up the travel page route */
 app.use('/travel', travelRouter);
+
+// wire-up API routes
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
